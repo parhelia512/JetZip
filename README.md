@@ -81,8 +81,8 @@ Contributions to **Callisto** are highly encouraged. Please feel free to submit 
 
 ### Support
 
-- <a href="https://github.com/tinyBigGAMES/JetLua/issues" target="_blank">Issues</a>
-- <a href="https://github.com/tinyBigGAMES/JetLua/discussions" target="_blank">Discussions</a>
+- <a href="https://github.com/tinyBigGAMES/JetZip/issues" target="_blank">Issues</a>
+- <a href="https://github.com/tinyBigGAMES/JetZip/discussions" target="_blank">Discussions</a>
 - <a href="https://learndelphi.org/" target="_blank">Learn Delphi</a>
 
 ---
