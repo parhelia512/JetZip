@@ -84,3 +84,4 @@ modules/
 bin/Data.zip
 *.dsv
 !src/JetZip.o
+bin/jetzip.png
