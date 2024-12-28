@@ -41,7 +41,7 @@
 
  ------------------------------------------------------------------------------
  This project uses the following open-source libraries:
-  - LuaJIT (https://github.com/LuaJIT/LuaJIT)
+  - zlib (https://github.com/madler/zlib)
 
  ------------------------------------------------------------------------------
 
@@ -329,8 +329,6 @@ public
     const AHandler: TJetZip.BuildProgressEvent = nil;
     const APassword: string = DefaultPassword): Boolean;
 end;
-
-
 
 implementation
 
@@ -753,167 +751,45 @@ begin
   Result := TFile.Exists(LFilename);
 end;
 
-
-
 {$ENDREGION}
 
 {$REGION ' CRUNTIME '}
 const
-  ntdll = 'ntdll.dll';
   kernel32 = 'kernel32.dll';
-  user32 = 'user32.dll';
-  shell32 = 'shell32.dll';
   ucrt = 'api-ms-win-crt-stdio-l1-1-0.dll';
-  msvcrt = 'msvcrt.dll';
-
-{ ntdll }
-procedure RtlRestoreContext; stdcall; external ntdll;
-procedure RtlUnwindEx; stdcall; external ntdll;
-procedure RtlLookupFunctionEntry; stdcall; external ntdll;
-procedure RtlCaptureContext; stdcall; external ntdll;
-procedure RtlVirtualUnwind; stdcall; external ntdll;
 
 { kenerl32}
 procedure ___chkstk_ms; stdcall; external kernel32 name '__chkstk';
-procedure GetModuleHandleExA; stdcall; external kernel32;
-procedure GetModuleHandleExW; stdcall; external kernel32;
-
-{ user32 }
-procedure EnumDisplaySettingsExW; stdcall; external user32;
-procedure GetMonitorInfoW; stdcall; external user32;
-procedure MonitorFromWindow; stdcall; external user32;
-procedure EnumDisplayMonitors; stdcall; external user32;
-procedure GetRawInputDeviceList; stdcall; external user32;
-procedure GetRawInputDeviceInfoA; stdcall; external user32;
-procedure RegisterRawInputDevices; stdcall; external user32;
-procedure GetRawInputData; stdcall; external user32;
-
-{ shell32}
-procedure DragAcceptFiles; stdcall; external shell32;
-procedure DragQueryFileW; stdcall; external shell32;
-procedure DragQueryPoint; stdcall; external shell32;
-procedure DragFinish; stdcall; external shell32;
 
 { ucrt }
-procedure feof; cdecl; external ucrt;
 procedure _ftelli64; cdecl; external ucrt;
 procedure _fseeki64; cdecl; external ucrt;
-procedure __DestructExceptionObject; cdecl; external ucrt;
-procedure __p__fmode; cdecl; external ucrt;
-procedure putchar; cdecl; external ucrt;
-procedure cosh; cdecl; external ucrt;
 procedure memmove; cdecl; external ucrt;
-procedure _fscalef; cdecl; external ucrt;
-procedure strtoul; cdecl; external ucrt;
-procedure strncpy; cdecl; external ucrt;
-procedure sinh; cdecl; external ucrt;
-procedure atan; cdecl; external ucrt;
-procedure modf; cdecl; external ucrt;
-procedure tanh; cdecl; external ucrt;
-procedure __mingw_strtod; cdecl; external ucrt name 'strtod';
-procedure system; cdecl; external ucrt;
-procedure rename; cdecl; external ucrt;
 procedure malloc; cdecl; external ucrt;
-procedure exit; cdecl; external ucrt;
 procedure memset; cdecl; external ucrt;
 procedure __intrinsic_setjmpex; cdecl; external ucrt;
 procedure _time64; cdecl; external ucrt;
 procedure strcmp; cdecl; external ucrt;
-procedure strlen; cdecl; external ucrt;
 procedure memcpy; external ucrt;
 procedure strchr; cdecl; external ucrt;
 procedure longjmp; cdecl; external ucrt;
-procedure abort; cdecl; external ucrt;
-procedure floor; cdecl; external ucrt;
-procedure memcmp; cdecl; external ucrt;
-procedure strcoll; cdecl; external ucrt;
-procedure strpbrk; cdecl; external ucrt;
 procedure strcpy; cdecl; external ucrt;
-procedure localeconv; cdecl; external ucrt;
-procedure strspn; cdecl; external ucrt;
-procedure strncmp; cdecl; external ucrt;
 procedure _errno; cdecl; external ucrt;
 procedure strerror; cdecl; external ucrt;
 procedure fopen; cdecl; external ucrt;
-procedure __acrt_iob_func; cdecl; external ucrt;
-procedure freopen; cdecl; external ucrt;
 procedure ferror; cdecl; external ucrt;
 procedure fclose; cdecl; external ucrt;
-procedure getc; cdecl; external ucrt;
 procedure fread; cdecl; external ucrt;
-procedure strstr; cdecl; external ucrt;
 procedure realloc; cdecl; external ucrt;
 procedure free; cdecl; external ucrt;
-procedure fflush; cdecl; external ucrt;
-procedure getenv; cdecl; external ucrt;
-procedure pow; cdecl; external ucrt;
-procedure fmod; cdecl; external ucrt;
-procedure frexp; cdecl; external ucrt;
-procedure ldexp; cdecl; external ucrt;
 procedure fwrite; cdecl; external ucrt;
-procedure fputs; cdecl; external ucrt;
-procedure fputc; cdecl; external ucrt;
-procedure isalnum; cdecl; external ucrt;
-procedure toupper; cdecl; external ucrt;
-procedure fgets; cdecl; external ucrt;
 procedure memchr; cdecl; external ucrt;
-procedure _popen; cdecl; external ucrt;
-procedure tmpfile; cdecl; external ucrt;
-procedure clearerr; cdecl; external ucrt;
-procedure ungetc; cdecl; external ucrt;
-procedure isspace; cdecl; external ucrt;
-procedure isxdigit; cdecl; external ucrt;
-procedure _pclose; cdecl; external ucrt;
 procedure fseek; cdecl; external ucrt;
 procedure ftell; cdecl; external ucrt;
-procedure setvbuf; cdecl; external ucrt;
-procedure acos; cdecl; external ucrt;
-procedure atan2; cdecl; external ucrt;
-procedure log; cdecl; external ucrt;
-procedure tan; cdecl; external ucrt;
 procedure clock; cdecl; external ucrt;
-procedure _gmtime64; cdecl; external ucrt;
-procedure _localtime64; cdecl; external ucrt;
-procedure strftime; cdecl; external ucrt;
-procedure _difftime64; cdecl; external ucrt;
-procedure remove; cdecl; external ucrt;
-procedure setlocale; cdecl; external ucrt;
-procedure _mktime64; cdecl; external ucrt;
-procedure tmpnam; cdecl; external ucrt;
-procedure isalpha; cdecl; external ucrt;
-procedure iscntrl; cdecl; external ucrt;
-procedure tolower; cdecl; external ucrt;
-procedure isgraph; cdecl; external ucrt;
-procedure islower; cdecl; external ucrt;
-procedure ispunct; cdecl; external ucrt;
-procedure isupper; cdecl; external ucrt;
-procedure strrchr; cdecl; external ucrt;
-procedure asin; cdecl; external ucrt;
-procedure ceil; cdecl; external ucrt;
-procedure log10; cdecl; external ucrt;
-procedure fmodf; cdecl; external ucrt;
-procedure sqrtf; cdecl; external ucrt;
-procedure strtol; cdecl; external ucrt;
-procedure cosf; cdecl; external ucrt;
 procedure rand; cdecl; external ucrt;
-procedure strncat; cdecl; external ucrt;
-procedure acosf; cdecl; external ucrt;
-procedure atan2f; cdecl; external ucrt;
-procedure sinf; cdecl; external ucrt;
-procedure ceilf; cdecl; external ucrt;
-procedure _stricmp; cdecl; external ucrt;
-procedure qsort; cdecl; external ucrt;
-procedure strok; cdecl; external ucrt;
-procedure strcspn; cdecl; external ucrt;
-procedure wcscpy; cdecl; external ucrt;
-procedure strtok; cdecl; external ucrt;
-procedure wcscmp; cdecl; external ucrt;
-procedure calloc; cdecl; external ucrt;
-procedure fgetc; cdecl; external ucrt;
 procedure srand; cdecl; external ucrt;
 procedure fopen64; cdecl; external ucrt name 'fopen';
-procedure _beginthreadex; cdecl; external ucrt;
-procedure _endthreadex; cdecl; external ucrt;
 procedure lseek; cdecl; external ucrt;
 procedure open; cdecl; external ucrt;
 procedure wcstombs; cdecl; external ucrt;
@@ -921,20 +797,10 @@ procedure _wopen; cdecl; external ucrt;
 procedure write; cdecl; external ucrt;
 procedure close; cdecl; external ucrt;
 procedure read; cdecl; external ucrt;
-procedure _wfopen; cdecl; external ucrt;
-procedure wcsrtombs; cdecl; external ucrt;
-procedure wcslen; cdecl; external ucrt;
 
-{ msvcrt }
-procedure fscanf; cdecl; external msvcrt;
-procedure sprintf; cdecl; external msvcrt;
-procedure sscanf; cdecl; external msvcrt;
-procedure fprintf; cdecl; external msvcrt;
-procedure snprintf; cdecl; external msvcrt name '_snprintf';
-procedure puts; cdecl; external msvcrt;
-procedure floorf; cdecl; external msvcrt;
-procedure printf; cdecl; external msvcrt;
-procedure vsnprintf; cdecl; external msvcrt;
+{ ucrt_extra }
+procedure snprintf; cdecl; external name 'ucrt_extra_snprintf';
+procedure vsnprintf; cdecl; external name 'ucrt_extra_vsnprintf';
 {$ENDREGION}
 
 end.
