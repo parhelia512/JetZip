@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1829F202-5146-488F-8718-ECFC1A93C1E4}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\build\jetZip\JetZip.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\examples\testbed\Testbed.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="JetZip">
+        <MSBuild Projects="..\..\build\jetZip\JetZip.cbproj"/>
+    </Target>
+    <Target Name="JetZip:Clean">
+        <MSBuild Projects="..\..\build\jetZip\JetZip.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="JetZip:Make">
+        <MSBuild Projects="..\..\build\jetZip\JetZip.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Testbed">
+        <MSBuild Projects="..\examples\testbed\Testbed.dproj"/>
+    </Target>
+    <Target Name="Testbed:Clean">
+        <MSBuild Projects="..\examples\testbed\Testbed.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Testbed:Make">
+        <MSBuild Projects="..\examples\testbed\Testbed.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="JetZip;Testbed"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="JetZip:Clean;Testbed:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="JetZip:Make;Testbed:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

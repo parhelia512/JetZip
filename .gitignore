@@ -79,3 +79,8 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+# JetZip
+bin/Data.zip
+*.dsv
+!src/JetZip.o
