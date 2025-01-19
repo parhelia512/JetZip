@@ -73,11 +73,11 @@ JetZip is the ultimate solution for Delphi developers who need professional-grad
 
 ### Contributing
 
-Contributions to **Callisto** are highly encouraged. Please feel free to submit issues, suggest new features, or create pull requests to expand the capabilities and robustness of the scripting engine.
+Contributions to **JetZip** are highly encouraged. Please feel free to submit issues, suggest new features, or create pull requests to expand its capabilities and robustness.
 
 ### License
 
-**Callisto** is distributed under the 🆓 **BSD-3-Clause License**, allowing for redistribution and use in both source and binary forms, with or without modification, under specific conditions. See the [LICENSE](https://github.com/tinyBigGAMES/JetZip?tab=BSD-3-Clause-1-ov-file#BSD-3-Clause-1-ov-file) file for more details.
+**JetZipo** is distributed under the 🆓 **BSD-3-Clause License**, allowing for redistribution and use in both source and binary forms, with or without modification, under specific conditions. See the [LICENSE](https://github.com/tinyBigGAMES/JetZip?tab=BSD-3-Clause-1-ov-file#BSD-3-Clause-1-ov-file) file for more details.
 
 ### Support
 
